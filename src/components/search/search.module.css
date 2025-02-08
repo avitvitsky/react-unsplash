@@ -1,0 +1,12 @@
+.root {
+  min-height: 38vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  align-items: center;
+}
+
+.search {
+  display: flex;
+  flex-wrap: nowrap;
+}
