@@ -1,0 +1,15 @@
+.placeholder {
+  box-sizing: border-box;
+  border: 1px solid #ebebeb;
+  border-radius: 4px;
+  width: 204px;
+  height: 204px;
+  margin: 4px 4px;
+}
+
+@media (max-width: 600px) {
+  .placeholder {
+    width: 114px;
+    height: 114px;
+  }
+}

@@ -1,7 +1,20 @@
+import { useState } from "react";
+import styles from "./image-item.module.css";
+
 export const ImageItem = ({ src }) => {
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  const handleOnLoad = () => setIsLoaded(true);
+
   return (
-    <a>
-      <img src={src} />
-    </a>
+    <>
+      <div
+        className={styles.placeholder}
+        style={isLoaded ? { display: "none" } : null}
+      ></div>
+      <a style={!isLoaded ? { display: "none" } : null}>
+        <img src={src} onLoad={handleOnLoad} />
+      </a>
+    </>
   );
 };
