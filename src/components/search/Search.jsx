@@ -16,11 +16,17 @@ export const Search = () => {
   const [searchImages, setSearchImages] = useState([]);
   const [searchActive, setSearchActive] = useState(false);
   const [searchPage, setSearchPage] = useState(0);
+  const [searchStatus, setSearchStatus] = useState({});
 
   const loadData = useCallback(async () => {
     apiUrl.searchParams.set("query", searchValue);
     apiUrl.searchParams.set("page", searchPage);
     const response = await fetch(apiUrl);
+    setSearchStatus({ ok: response.ok, status: response.status });
+    if (!response.ok) {
+      setSearchPage(0);
+      return;
+    }
     const result = await response.json();
     const urls = result.results.reduce((acc, item) => {
       acc.push(item.urls.small);
@@ -81,7 +87,9 @@ export const Search = () => {
           <Button title="Искать" />
         </form>
       </div>
-      {searchActive && <ImagesGrid images={searchImages} />}
+      {searchActive && (
+        <ImagesGrid images={searchImages} status={searchStatus} />
+      )}
     </>
   );
 };

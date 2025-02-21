@@ -1,12 +1,36 @@
+import { useEffect, useState } from "react";
 import { ImageItem } from "../image-item/ImageItem";
 import styles from "./images-grid.module.css";
 
-export const ImagesGrid = ({ images }) => {
+export const ImagesGrid = ({ images, status }) => {
+  const [isEmpty, setIsEmpty] = useState(false);
+
+  useEffect(() => {
+    setIsEmpty(false);
+  }, [status]);
+
+  useEffect(() => {
+    if (status.status !== 200) {
+      setIsEmpty(true);
+    }
+  }, [status]);
+
+  useEffect(() => {
+    let timeoutId;
+    if (Object.keys(status).length && status.ok && images.length === 0) {
+      timeoutId = setTimeout(() => {
+        setIsEmpty(true);
+      }, 3000);
+    }
+
+    return () => clearTimeout(timeoutId);
+  }, [status, images.length]);
+
   return (
     <>
       <div
         className={styles.empty}
-        style={images.length !== 0 ? { display: "none" } : null}
+        style={isEmpty ? null : { display: "none" }}
       >
         К сожалению, поиск не дал результатов
       </div>
