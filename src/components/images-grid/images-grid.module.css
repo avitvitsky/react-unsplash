@@ -22,3 +22,40 @@
   color: #787878;
   margin: 59px 0px;
 }
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.modalImage {
+  margin: auto;
+  display: block;
+  max-width: 80%;
+}
+
+.close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  position: absolute;
+  top: 23px;
+  right: 24px;
+  background-color: #ffffff;
+}
+
+.close img {
+  width: 14px;
+  height: 14px;
+}

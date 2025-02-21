@@ -1,16 +1,19 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ImageItem } from "../image-item/ImageItem";
+import closeImage from "./close.svg";
 import styles from "./images-grid.module.css";
 
 export const ImagesGrid = ({ images, status }) => {
   const [isEmpty, setIsEmpty] = useState(false);
+  const modal = useRef();
+  const modalImage = useRef();
 
   useEffect(() => {
     setIsEmpty(false);
   }, [status]);
 
   useEffect(() => {
-    if (status.status !== 200) {
+    if (Object.keys(status).length && status.status !== 200) {
       setIsEmpty(true);
     }
   }, [status]);
@@ -26,6 +29,15 @@ export const ImagesGrid = ({ images, status }) => {
     return () => clearTimeout(timeoutId);
   }, [status, images.length]);
 
+  const handleImageOnClick = (src) => {
+    modal.current.style.display = "block";
+    modalImage.current.src = src;
+  };
+
+  const handleCloseOnClick = () => {
+    modal.current.style.display = "none";
+  };
+
   return (
     <>
       <div
@@ -36,8 +48,14 @@ export const ImagesGrid = ({ images, status }) => {
       </div>
       <div className={styles.root}>
         {images.map((url, index) => (
-          <ImageItem key={index} src={url} />
+          <ImageItem key={index} src={url} onClick={handleImageOnClick} />
         ))}
+      </div>
+      <div ref={modal} className={styles.modal}>
+        <div className={styles.close} onClick={handleCloseOnClick}>
+          <img src={closeImage} />
+        </div>
+        <img ref={modalImage} className={styles.modalImage} />
       </div>
     </>
   );
