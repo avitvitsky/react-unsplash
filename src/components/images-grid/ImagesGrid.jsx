@@ -30,19 +30,26 @@ export const ImagesGrid = ({ images, status }) => {
   }, [status, images.length]);
 
   const handleImageOnClick = (src) => {
+    const offsetWidthWithScrollbar = document.body.offsetWidth;
     modal.current.style.display = "block";
+    document.body.style.overflow = "hidden";
+    document.body.style.paddingRight = `${
+      document.body.offsetWidth - offsetWidthWithScrollbar
+    }px`;
     modalImage.current.src = src;
   };
 
   const handleCloseOnClick = () => {
     modal.current.style.display = "none";
+    document.body.style.paddingRight = "0px";
+    document.body.style.overflow = "auto";
   };
 
   return (
     <>
       <div
         className={styles.empty}
-        style={isEmpty ? null : { display: "none" }}
+        style={isEmpty && !images.length ? null : { display: "none" }}
       >
         К сожалению, поиск не дал результатов
       </div>

@@ -8,6 +8,7 @@
   height: 48px;
   max-width: 420px;
   width: calc(100vw - 86px - 2 * 16px - 8px);
+  font-size: 16px;
   box-sizing: border-box;
   background-color: #eeeeee;
   border-radius: 12px;
@@ -20,6 +21,16 @@
 .input:focus {
   background-color: #e6e6e6;
   outline: none;
+}
+
+.input:hover {
+  background-color: #e6e6e6;
+  outline: none;
+}
+
+.input::placeholder {
+  color: #9c9c9c;
+  font-size: 16px;
 }
 
 .reset {

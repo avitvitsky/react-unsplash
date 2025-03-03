@@ -33,10 +33,7 @@ export const Search = () => {
       return acc;
     }, []);
     setSearchImages((prev) => [...prev, ...urls]);
-    if (
-      searchPage <= 1 &&
-      window.innerHeight + window.scrollY >= document.body.offsetHeight
-    ) {
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
       setSearchPage(searchPage + 1);
     }
   }, [searchValue, searchPage]);
@@ -80,6 +77,7 @@ export const Search = () => {
       <div
         className={classNames({
           [styles.root]: !searchActive,
+          [styles.rootActive]: searchActive,
         })}
       >
         <form className={styles.search} onSubmit={handleSubmitForm}>

@@ -1,10 +1,18 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "./image-item.module.css";
 
 export const ImageItem = ({ src, onClick }) => {
   const [isLoaded, setIsLoaded] = useState(false);
 
-  const handleOnLoad = () => setIsLoaded(true);
+  const image = useRef();
+
+  const handleOnLoad = () => setTimeout(() => setIsLoaded(true), 100);
+
+  useEffect(() => {
+    if (image.current.complete) {
+      setTimeout(() => setIsLoaded(true), 100);
+    }
+  }, []);
 
   return (
     <>
@@ -16,7 +24,12 @@ export const ImageItem = ({ src, onClick }) => {
         onClick={() => onClick(src)}
         style={!isLoaded ? { display: "none" } : null}
       >
-        <img src={src} onLoad={handleOnLoad} />
+        <img
+          className={styles.image}
+          ref={image}
+          src={src}
+          onLoad={handleOnLoad}
+        />
       </a>
     </>
   );

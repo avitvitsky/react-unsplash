@@ -1,3 +1,9 @@
+.image {
+  border: 1px solid #ebebeb;
+  border-radius: 4px;
+  object-fit: cover;
+}
+
 .placeholder {
   box-sizing: border-box;
   border: 1px solid #ebebeb;

@@ -6,6 +6,28 @@
   align-items: center;
 }
 
+@media (max-width: 1024px) {
+  .rootActive {
+    height: 69px;
+    padding-top: 5px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .rootActive {
+    height: 104px;
+    padding-top: 39px;
+  }
+}
+
+.rootActive {
+  position: fixed;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: white;
+  top: 0;
+}
+
 .search {
   display: flex;
   flex-wrap: nowrap;
